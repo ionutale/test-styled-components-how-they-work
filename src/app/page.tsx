@@ -57,6 +57,14 @@ export default function Home() {
     setColor(randomColor);
   };
 
+  const generateTitles = () => {
+    const titles = [];
+    for (let i = 0; i < 10000; i++) {
+      titles.push(<Title key={i} fontSize={fontSize} color={color}>Hello World</Title>);
+    }
+    return titles;
+  };
+
   return (
     <main>
       <button onClick={handleFontSize}>increase font size</button>
@@ -65,6 +73,9 @@ export default function Home() {
       fontSize={fontSize}
       color={color}
       >Hello World</Title>
+      <section>
+        {generateTitles()}
+      </section>
     </main>
   );
 }
