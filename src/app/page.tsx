@@ -10,7 +10,15 @@ const Title = styled.h1<{ fontSize: number, color: string
   border: 1px solid #BF4F74;
   padding: 1rem;
   border-radius: 0.5rem;
-  margin: 1rem;
+  margin: 1rem auto;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  cursor: pointer;
+  text-transform: uppercase;
+  width: calc(100% - 4rem);
+  max-width: 450px;
+  display: block;
 
   &:hover {
     color: #F7B801;
@@ -26,6 +34,12 @@ const Title = styled.h1<{ fontSize: number, color: string
     color: #0E2A47;
     border-color: #0E2A47;
   }
+
+  @media (max-width: 768px) {
+    font-size: ${(props) => props.fontSize - 0.2}rem;
+  }
+
+
 `;
 
 const colors = ['#BF4F74', '#F7B801', '#3B5998', '#0E2A47', '#F7B801', '#3B5998', '#0E2A47'];
