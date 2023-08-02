@@ -44,28 +44,29 @@ const colors = [
   "#F7B801",
   "#3B5998",
   "#0E2A47",
-  "#F7B801",
-  "#3B5998",
-  "#0E2A47",
 ];
 
 export default function Home() {
   const [fontSize, setFontSize] = useState(0.5);
   const [color, setColor] = useState("#BF4F74");
+  const [numberOfTitles, setNumberOfTitles] = useState<number>(1000);
+  const [drawnNumberOfTitles, setDrawnNumberOfTitles] = useState<number>(1000);
 
   const handleFontSize = () => {
     setFontSize((prevFontSize) => prevFontSize + 0.1);
   };
 
   const handleColor = () => {
-    const nextColor = colors.findIndex((color) => color === color) + 1;
-    if (nextColor === colors.length) return setColor(colors[0]);
-    setColor(colors[nextColor]);
+    setColor((prevColor) => {
+      const nextColor = colors.findIndex((color) => color === prevColor) + 1;
+      if (nextColor >= colors.length) return colors[0];
+      return colors[nextColor]
+    });
   };
 
-  const generateTitles = () => {
+  const generateTitles = (numberOfTitles = 1000) => {
     const titles = [];
-    for (let i = 0; i < 10000; i++) {
+    for (let i = 0; i < numberOfTitles; i++) {
       titles.push(
         <Title key={i} fontSize={fontSize} color={color}>
           Hello World
@@ -79,10 +80,12 @@ export default function Home() {
     <main>
       <button onClick={handleFontSize}>increase font size</button>
       <button onClick={handleColor}>change color</button>
+      <input type="number" onChange={(e) => setNumberOfTitles(+e.target.value)} />
+      <button onClick={() => setDrawnNumberOfTitles(numberOfTitles)}> draw titles </button>
       <Title fontSize={fontSize} color={color}>
         Hello World
       </Title>
-      <section>{generateTitles()}</section>
+      <section>{generateTitles(drawnNumberOfTitles)}</section>
     </main>
   );
 }
